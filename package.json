@@ -19,7 +19,10 @@
   },
   "name": "blog-backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "app.ts",
+  "engines": {
+    "node": "14.x"
+  },
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --respawn --transpile-only src/app.ts"
