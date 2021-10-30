@@ -18,6 +18,6 @@ Router.get('/blog/:id',blogController.getBlog)
 
 Router.get('/projects',blogController.getProjects)
 
-Router.post('/project',authMiddelwares.isAuth,  upload.single('images'),blogController.addProject)
+Router.post('/projects',authMiddelwares.isAuth,  upload.single('image'),blogController.addProject)
 
 export default Router;

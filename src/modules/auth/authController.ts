@@ -7,6 +7,7 @@ dotenv.config()
 // @ts-ignore
 import {User } from './../../database/models'
 import bcrypt from 'bcryptjs';
+import errorHandler from '../../helpers/errorHandler';
 class authController {
     static async getUser(req:Request,res:Response){
         try{
@@ -55,13 +56,15 @@ class authController {
                           expiresIn: "24h",
                         }
                       );
+                    console.log(token)
                     return responseHandler(res,200,token)
                 }
-                return responseHandler(res,200,"login fail")
+                return responseHandler(res,404,"Invalid credentials")
             }
-            return 
+            return responseHandler(res,404,'User not found')
         } catch(error){
             console.log(error)
+            errorHandler(res,500,error)
         }
     }
 }

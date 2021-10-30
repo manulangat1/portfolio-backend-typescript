@@ -1,14 +1,16 @@
-import express from 'express';
+import express, {Application} from 'express';
 import modules from './modules';
 import * as  dotenv from 'dotenv';
-
+import cors from 'cors'
+import morgan from 'morgan'
 dotenv.config()
 
-const app = express();
+const app:Application = express();
 
 const PORT = process.env.PORT
-
+app.use(cors())
 app.use(express.json());
+app.use(morgan('dev'))
 // app.use(express.urlencoded({extended:true})); not needed anymore
 
 modules(app);

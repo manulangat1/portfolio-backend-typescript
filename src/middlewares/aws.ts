@@ -22,6 +22,7 @@ export class Uploads{
 
     static async upload( file:any){
         try {
+            console.log(file)
             const fileStream = fs.createReadStream(file.path);
             const uploadParams = {
                 Bucket:bucketName,
@@ -52,7 +53,8 @@ export class Uploads{
             // upload.single('images')
             // next()
         } catch (error) {
-            errorHandler(res,500,error)
+            // errorHandler(res,500,error)
+            console.log(error)
         }
         
     }

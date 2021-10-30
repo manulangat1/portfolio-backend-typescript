@@ -5,6 +5,7 @@ import responseHandler from '../../helpers/responseHandler';
 import { Request,Response} from 'express'
 import errorHandler from '../../helpers/errorHandler';
 import { Uploads } from '../../middlewares/aws';
+import multer from 'multer';
 
 
 
@@ -36,7 +37,7 @@ export class blogController{
         }
     }
 
-    static async getBlog(req:Request, res: Response): Promise<blog>{
+    static async getBlog(req:Request, res: Response){
         try {
             const blog = await Blog.findOne({where:{id:req.params.id}});
             
@@ -55,7 +56,10 @@ export class blogController{
         }
     }
     static async addProject(req:Request, res: Response){
+        console.log(req)
         try {
+            const upload = multer({dest:'uploads/'})
+            console.log(upload.single(req.body.image))
             const { title, description, liveLink, gitLink} = req.body;
             const image = await Uploads.upload(req.file);
             const Location = image?.Location
@@ -64,8 +68,9 @@ export class blogController{
                 image:Location
             })
             return responseHandler(res,201,project);
-        } catch (error) {
-            errorHandler(res,500,error)
+        } catch (error:any) {
+            console.log(error)
+            errorHandler(res,500,error?.message)
         }
     }
 }
