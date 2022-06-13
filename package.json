@@ -21,7 +21,7 @@
   "version": "1.0.0",
   "main": "app.ts",
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   },
   "license": "MIT",
   "scripts": {
